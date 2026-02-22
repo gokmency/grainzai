@@ -1,0 +1,46 @@
+# For detailed configuration reference documentation, visit:
+# https://supabase.com/docs/guides/local-development/cli/config
+
+project_id = "grainz3d"
+
+[realtime]
+enabled = false
+
+[inbucket]
+enabled = true
+
+[storage]
+enabled = true
+file_size_limit = "50MiB"
+
+[storage.buckets.images]
+public = false
+file_size_limit = "50MiB"
+# Allow images and STL files (STL often comes as application/octet-stream)
+allowed_mime_types = ["image/png", "image/jpeg", "image/jpg", "image/webp", "model/stl", "application/sla", "application/octet-stream"]
+
+[auth]
+enable_anonymous_sign_ins = true
+enable_manual_linking = true
+
+[auth.email]
+enable_confirmations = true
+
+[auth.external.google]
+enabled = true
+client_id = "env(GOOGLE_CLIENT_ID)"
+secret = "env(GOOGLE_SECRET)"
+
+# verify_jwt = false so OPTIONS preflight (no JWT) reaches the function and gets CORS headers.
+# Auth is still enforced inside each function via getAnonSupabaseClient + auth.getUser().
+[functions.chat]
+enabled = true
+verify_jwt = false
+
+[functions.title-generator]
+enabled = true
+verify_jwt = false
+
+[functions.prompt-generator]
+enabled = true
+verify_jwt = false

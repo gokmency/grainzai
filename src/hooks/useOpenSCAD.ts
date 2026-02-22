@@ -1,0 +1,178 @@
+import { useState, useCallback, useRef, useEffect } from 'react';
+import { WorkerMessage, WorkerMessageType } from '@/worker/types';
+import OpenSCADError from '@/lib/OpenSCADError';
+
+// Type for pending request resolvers
+type PendingRequest = {
+  resolve: (value: unknown) => void;
+  reject: (error: Error) => void;
+};
+
+export function useOpenSCAD() {
+  const [isCompiling, setIsCompiling] = useState(false);
+  const [error, setError] = useState<OpenSCADError | Error | undefined>();
+  const [isError, setIsError] = useState(false);
+  const [output, setOutput] = useState<Blob | undefined>();
+  const workerRef = useRef<Worker | null>(null);
+  // Track files written to the worker filesystem
+  const writtenFilesRef = useRef<Set<string>>(new Set());
+  // Track pending requests waiting for worker responses
+  const pendingRequestsRef = useRef<Map<string, PendingRequest>>(new Map());
+
+  const getWorker = useCallback(() => {
+    if (!workerRef.current) {
+      workerRef.current = new Worker(
+        new URL('../worker/worker.ts', import.meta.url),
+        { type: 'module' },
+      );
+    }
+    return workerRef.current;
+  }, []);
+
+  const eventHandler = useCallback((event: MessageEvent) => {
+    const { id, type, err } = event.data;
+
+    // Check if this is a response to a pending request (fs operations)
+    if (id && pendingRequestsRef.current.has(id)) {
+      const pending = pendingRequestsRef.current.get(id)!;
+      pendingRequestsRef.current.delete(id);
+
+      if (err) {
+        pending.reject(new Error(err.message || 'Worker operation failed'));
+      } else {
+        pending.resolve(event.data.data);
+      }
+      return;
+    }
+
+    // Handle preview/export responses (state-based)
+    if (
+      type === WorkerMessageType.PREVIEW ||
+      type === WorkerMessageType.EXPORT
+    ) {
+      if (err) {
+        setError(err);
+        setIsError(true);
+        setOutput(undefined);
+      } else if (event.data.data?.output) {
+        const blob = new Blob([event.data.data.output], {
+          type:
+            event.data.data.fileType === 'stl' ? 'model/stl' : 'image/svg+xml',
+        });
+        setOutput(blob);
+      }
+      setIsCompiling(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const worker = getWorker();
+    worker.addEventListener('message', eventHandler);
+
+    return () => {
+      workerRef.current?.terminate();
+      workerRef.current = null;
+      writtenFilesRef.current.clear();
+      // Reject any pending requests on cleanup
+      pendingRequestsRef.current.forEach((pending) => {
+        pending.reject(new Error('Worker terminated'));
+      });
+      pendingRequestsRef.current.clear();
+    };
+  }, [eventHandler, getWorker]);
+
+  // Write a file to the OpenSCAD worker filesystem
+  // Returns a promise that resolves when the worker confirms the write
+  const writeFile = useCallback(
+    async (path: string, content: Blob | File): Promise<void> => {
+      const worker = getWorker();
+
+      // Get the ArrayBuffer (this creates a copy)
+      const arrayBuffer = await content.arrayBuffer();
+
+      // Generate unique ID for this request
+      const requestId = `fs-write-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
+      // Create promise that will resolve when worker responds
+      const responsePromise = new Promise<void>((resolve, reject) => {
+        pendingRequestsRef.current.set(requestId, {
+          resolve: () => resolve(),
+          reject,
+        });
+      });
+
+      const message: WorkerMessage & { id: string } = {
+        id: requestId,
+        type: WorkerMessageType.FS_WRITE,
+        data: {
+          path,
+          content: arrayBuffer,
+          type: content.type,
+        },
+      };
+
+      // Transfer the ArrayBuffer to the worker (zero-copy transfer)
+      worker.postMessage(message, [arrayBuffer]);
+
+      // Wait for worker to confirm the write
+      await responsePromise;
+      writtenFilesRef.current.add(path);
+    },
+    [getWorker],
+  );
+
+  // Remove a file from the worker filesystem
+  const unlinkFile = useCallback(
+    (path: string): void => {
+      const worker = getWorker();
+
+      const message: WorkerMessage = {
+        type: WorkerMessageType.FS_UNLINK,
+        data: { path },
+      };
+
+      worker.postMessage(message);
+      writtenFilesRef.current.delete(path);
+    },
+    [getWorker],
+  );
+
+  // Check if a file has been written to the worker
+  const hasFile = useCallback((path: string): boolean => {
+    return writtenFilesRef.current.has(path);
+  }, []);
+
+  const compileScad = useCallback(
+    async (code: string) => {
+      setIsCompiling(true);
+      setError(undefined);
+      setIsError(false);
+
+      const worker = getWorker();
+      // Note: Event listener is already added in useEffect, no need to add again
+
+      const message: WorkerMessage = {
+        type: WorkerMessageType.PREVIEW,
+        data: {
+          code,
+          params: [],
+          fileType: 'stl',
+        },
+      };
+
+      worker.postMessage(message);
+    },
+    [getWorker],
+  );
+
+  return {
+    compileScad,
+    writeFile,
+    unlinkFile,
+    hasFile,
+    isCompiling,
+    output,
+    error,
+    isError,
+  };
+}
