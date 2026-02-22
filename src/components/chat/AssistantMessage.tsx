@@ -249,7 +249,7 @@ function ObjectButton({
   currentVersion: number;
 }) {
   const [isHovered, setIsHovered] = useState(false);
-  let title = 'Adam Object';
+  let title = 'GRAINZ AI Object';
   if (message.content.artifact) {
     title = message.content.artifact.title;
   }

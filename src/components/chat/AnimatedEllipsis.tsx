@@ -45,7 +45,7 @@ export function AnimatedEllipsis({
         <style
           dangerouslySetInnerHTML={{
             __html: `
-            @keyframes adamNeutralPulse {
+            @keyframes grainzNeutralPulse {
               0%, 66.66%, 100% {
                 background-color: rgb(107 114 128); /* grainz-neutral-500 */
               }
@@ -72,7 +72,7 @@ export function AnimatedEllipsis({
             )}
             style={{
               ...(color === 'grainz-neutral' && {
-                animation: `adamNeutralPulse 1.2s ease-in-out ${(2 - i) * -0.4}s infinite`,
+                animation: `grainzNeutralPulse 1.2s ease-in-out ${(2 - i) * -0.4}s infinite`,
               }),
               ...(color !== 'grainz-neutral' && {
                 animationDelay: `${i * 200}ms`,

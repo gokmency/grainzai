@@ -41,7 +41,7 @@ export function ParameterInput({
     return (
       <div className="grid w-full grid-cols-[80px_1fr] items-center gap-3">
         <Label
-          className="overflow-hidden text-ellipsis text-xs font-normal text-adam-neutral-300"
+          className="overflow-hidden text-ellipsis text-xs font-normal text-grainz-neutral-300"
           htmlFor={paramState.name}
         >
           {paramState.displayName}
@@ -57,7 +57,7 @@ export function ParameterInput({
               id={paramState.name}
               name={paramState.name}
               autoComplete="off"
-              className="h-6 w-14 rounded-lg bg-adam-neutral-800 px-2 text-left text-xs text-adam-text-primary transition-colors selection:bg-adam-blue/50 selection:text-white focus:outline-none [@media(hover:hover)]:hover:bg-adam-neutral-700"
+              className="h-6 w-14 rounded-lg bg-grainz-neutral-800 px-2 text-left text-xs text-grainz-text-primary transition-colors selection:bg-grainz-blue/50 selection:text-white focus:outline-none [@media(hover:hover)]:hover:bg-grainz-neutral-700"
               value={String(paramState.value)}
               onKeyDown={onEnter}
               onChange={(e) => handleValueChange(e.target.value)}
@@ -68,7 +68,7 @@ export function ParameterInput({
                 );
               }}
             />
-            <span className="ml-1 w-6 text-left text-xs text-adam-neutral-300">
+            <span className="ml-1 w-6 text-left text-xs text-grainz-neutral-300">
               {isMeasurementParameter(paramState) ? 'mm' : ''}
             </span>
           </div>
@@ -80,7 +80,7 @@ export function ParameterInput({
     return (
       <div className="grid w-full grid-cols-[80px_1fr] items-center gap-3">
         <Label
-          className="overflow-hidden text-ellipsis text-xs font-normal text-adam-neutral-300"
+          className="overflow-hidden text-ellipsis text-xs font-normal text-grainz-neutral-300"
           htmlFor={paramState.name}
         >
           {paramState.displayName}
@@ -98,7 +98,7 @@ export function ParameterInput({
     return (
       <div className="grid w-full grid-cols-[80px_1fr] items-center gap-3">
         <Label
-          className="overflow-hidden text-ellipsis text-xs font-normal text-adam-neutral-300"
+          className="overflow-hidden text-ellipsis text-xs font-normal text-grainz-neutral-300"
           htmlFor={paramState.name}
         >
           {paramState.displayName}
@@ -107,7 +107,7 @@ export function ParameterInput({
           id={paramState.name}
           name={paramState.name}
           autoComplete="off"
-          className="h-6 w-full min-w-0 rounded-md bg-adam-neutral-800 px-2 text-left text-xs text-adam-text-primary transition-colors selection:bg-adam-blue/50 selection:text-white focus:outline-none [@media(hover:hover)]:hover:bg-adam-neutral-700"
+          className="h-6 w-full min-w-0 rounded-md bg-grainz-neutral-800 px-2 text-left text-xs text-grainz-text-primary transition-colors selection:bg-grainz-blue/50 selection:text-white focus:outline-none [@media(hover:hover)]:hover:bg-grainz-neutral-700"
           value={String(paramState.value)}
           onChange={(e) => handleValueChange(e.target.value)}
           onFocus={(e) => e.target.select()}
@@ -122,7 +122,7 @@ export function ParameterInput({
       return (
         <div className="grid w-full grid-cols-[80px_1fr] items-start gap-3">
           <Label
-            className="overflow-hidden text-ellipsis pt-2 text-xs font-normal text-adam-neutral-300"
+            className="overflow-hidden text-ellipsis pt-2 text-xs font-normal text-grainz-neutral-300"
             htmlFor={paramState.name}
           >
             {paramState.displayName}
@@ -134,7 +134,7 @@ export function ParameterInput({
                 id={`${paramState.name}-${index}`}
                 name={paramState.name}
                 autoComplete="off"
-                className="h-6 w-full min-w-0 rounded-md bg-adam-neutral-800 px-2 text-left text-xs text-adam-text-primary transition-colors selection:bg-adam-blue/50 selection:text-white focus:outline-none [@media(hover:hover)]:hover:bg-adam-neutral-700"
+                className="h-6 w-full min-w-0 rounded-md bg-grainz-neutral-800 px-2 text-left text-xs text-grainz-text-primary transition-colors selection:bg-grainz-blue/50 selection:text-white focus:outline-none [@media(hover:hover)]:hover:bg-grainz-neutral-700"
                 value={String(value)}
                 onKeyDown={onEnter}
                 onFocus={(e) => e.target.select()}
@@ -166,7 +166,7 @@ export function ParameterInput({
       return (
         <div className="grid w-full grid-cols-[80px_1fr] items-start gap-3">
           <Label
-            className="overflow-hidden text-ellipsis pt-2 text-xs font-normal text-adam-neutral-300"
+            className="overflow-hidden text-ellipsis pt-2 text-xs font-normal text-grainz-neutral-300"
             htmlFor={paramState.name}
           >
             {paramState.displayName}
@@ -207,7 +207,7 @@ export function ParameterInput({
                       id={`${paramState.name}-${index}`}
                       name={paramState.name}
                       autoComplete="off"
-                      className="h-6 w-14 rounded-md bg-adam-neutral-800 px-2 text-left text-xs text-adam-text-primary transition-colors selection:bg-adam-blue/50 selection:text-white focus:outline-none [@media(hover:hover)]:hover:bg-adam-neutral-700"
+                      className="h-6 w-14 rounded-md bg-grainz-neutral-800 px-2 text-left text-xs text-grainz-text-primary transition-colors selection:bg-grainz-blue/50 selection:text-white focus:outline-none [@media(hover:hover)]:hover:bg-grainz-neutral-700"
                       value={String(value)}
                       onKeyDown={onEnter}
                       onFocus={(e) => e.target.select()}
@@ -236,7 +236,7 @@ export function ParameterInput({
                         handleValueCommit(updatedValue as Parameter['value']);
                       }}
                     />
-                    <span className="w-6 text-left text-xs text-adam-neutral-300">
+                    <span className="w-6 text-left text-xs text-grainz-neutral-300">
                       {isMeasurementParameter(paramState) ? 'mm' : ''}
                     </span>
                   </div>
@@ -253,7 +253,7 @@ export function ParameterInput({
       return (
         <div className="grid w-full grid-cols-[80px_1fr] items-start gap-3">
           <Label
-            className="overflow-hidden text-ellipsis pt-2 text-xs font-normal text-adam-neutral-300"
+            className="overflow-hidden text-ellipsis pt-2 text-xs font-normal text-grainz-neutral-300"
             htmlFor={paramState.name}
           >
             {paramState.displayName}
