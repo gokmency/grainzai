@@ -3,7 +3,7 @@ import fs from 'fs';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
-const BASE = '/grainz3d';
+const BASE = '/';
 
 export default defineConfig({
   base: BASE,
@@ -13,12 +13,11 @@ export default defineConfig({
       name: 'serve-public-under-base',
       configureServer(server) {
         server.middlewares.use((req, res, next) => {
-          if (req.url?.startsWith(`${BASE}/`) && req.method === 'GET') {
-            const filePath = path.join(
-              __dirname,
-              'public',
-              req.url.slice(BASE.length).replace(/^\//, ''),
-            );
+          const url = req.url ?? '';
+          const pathAfterBase =
+            BASE === '/' ? url.replace(/^\//, '') : url.replace(new RegExp(`^${BASE}/?`), '');
+          if (pathAfterBase !== url) {
+            const filePath = path.join(__dirname, 'public', pathAfterBase);
             if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
               res.setHeader('Content-Type', getMime(filePath));
               fs.createReadStream(filePath).pipe(res);
@@ -39,7 +38,7 @@ export default defineConfig({
   build: {
     chunkSizeWarningLimit: 1000,
 
-    outDir: 'dist/grainz3d',
+    outDir: 'dist',
     emptyOutDir: true,
 
     rollupOptions: {
@@ -58,7 +57,7 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-    open: BASE,
+    open: BASE === '/' ? '/' : BASE,
   },
   optimizeDeps: {
     exclude: ['@zip.js/zip.js', 'three', 'three-stdlib'],

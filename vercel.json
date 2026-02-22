@@ -1,21 +1,8 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
   "rewrites": [
-    {
-      "source": "/grainz3d",
-      "destination": "/grainz3d/index.html"
-    },
-    {
-      "source": "/grainz3d/",
-      "destination": "/grainz3d/index.html"
-    },
-    {
-      "source": "/grainz3d/assets/:path*",
-      "destination": "/grainz3d/assets/:path*"
-    },
-    {
-      "source": "/grainz3d/:path*",
-      "destination": "/grainz3d/index.html"
-    }
-  ],
-  "trailingSlash": false
+    { "source": "/((?!assets/).*)", "destination": "/index.html" }
+  ]
 }
