@@ -16,6 +16,10 @@ import { corsHeaders } from '../_shared/cors.ts';
 // OpenRouter API configuration
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 const OPENROUTER_API_KEY = Deno.env.get('OPENROUTER_API_KEY') ?? '';
+const OPENROUTER_REFERER =
+  Deno.env.get('OPENROUTER_REFERER') ?? 'https://grainzai.vercel.app';
+const OPENROUTER_APP_TITLE =
+  Deno.env.get('OPENROUTER_APP_TITLE') ?? 'GRAINZ AI';
 
 // Helper to stream updated assistant message rows
 function streamMessage(
@@ -186,8 +190,8 @@ async function generateTitleFromMessages(
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${OPENROUTER_API_KEY}`,
-        'HTTP-Referer': 'https://grainz3d.com',
-        'X-Title': 'Grainz3D',
+        'HTTP-Referer': OPENROUTER_REFERER,
+        'X-Title': OPENROUTER_APP_TITLE,
       },
       body: JSON.stringify({
         model: 'anthropic/claude-3.5-haiku',
@@ -583,8 +587,8 @@ Deno.serve(async (req) => {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${OPENROUTER_API_KEY}`,
-        'HTTP-Referer': 'https://grainz3d.com',
-        'X-Title': 'Grainz3D',
+        'HTTP-Referer': OPENROUTER_REFERER,
+        'X-Title': OPENROUTER_APP_TITLE,
       },
       body: JSON.stringify(requestBody),
     });
@@ -847,8 +851,8 @@ Deno.serve(async (req) => {
                 headers: {
                   'Content-Type': 'application/json',
                   Authorization: `Bearer ${OPENROUTER_API_KEY}`,
-                  'HTTP-Referer': 'https://grainz3d.com',
-                  'X-Title': 'Grainz3D',
+                  'HTTP-Referer': OPENROUTER_REFERER,
+                  'X-Title': OPENROUTER_APP_TITLE,
                 },
                 body: JSON.stringify(codeRequestBody),
               }).then(async (r) => {

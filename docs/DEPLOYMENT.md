@@ -1,5 +1,7 @@
 # GRAINZ AI – Supabase + Vercel Deployment
 
+Production URL: **https://grainzai.vercel.app**
+
 Bu rehber projeyi **Supabase** (backend + auth + Edge Functions) ve **Vercel** (frontend) üzerinde yayına almak için adımları özetler.
 
 ---
