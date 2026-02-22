@@ -78,7 +78,7 @@ export function ParametricEditor() {
   useEffect(() => {
     setCurrentMessage(null);
     setBlob(null);
-    setColor('#00A6FF');
+    setColor('#A78BFA');
   }, [conversation.id, setCurrentMessage, setBlob, setColor]);
 
   useEffect(() => {

@@ -71,7 +71,7 @@ function ThreePreview({ geometry }: { geometry: BufferGeometry }) {
           position={[0, 0, 0]}
         >
           <meshStandardMaterial
-            color="#00A6FF"
+            color="#A78BFA"
             metalness={0.6}
             roughness={0.3}
             envMapIntensity={0.3}
@@ -201,7 +201,7 @@ export function VisualCard({
   return (
     <div
       ref={cardRef}
-      className="group relative overflow-hidden rounded-xl border-2 border-grainz-neutral-700 bg-grainz-background-2 transition-all duration-200 hover:border-grainz-blue hover:shadow-[0_0_20px_rgba(0,166,255,0.3)]"
+      className="group relative overflow-hidden rounded-xl border-2 border-grainz-neutral-700 bg-grainz-background-2 transition-all duration-200 hover:border-grainz-blue hover:shadow-[0_0_20px_rgba(167,139,250,0.3)]"
     >
       <Link to={`/editor/${conversation.id}`}>
         <div className="relative aspect-square w-full overflow-hidden bg-gradient-to-br from-grainz-background-1 to-grainz-background-2">

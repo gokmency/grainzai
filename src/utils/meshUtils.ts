@@ -95,9 +95,9 @@ async function renderMultipleAngles(
   // Clone geometry to avoid disposing the original
   const geometryClone = geometry.clone();
 
-  // Add mesh with brand blue (grainz-blue)
+  // Add mesh with brand accent (grainz-blue / light purple)
   const material = new THREE.MeshStandardMaterial({
-    color: 0x00a6ff,
+    color: 0xa78bfa,
     metalness: 0.3,
     roughness: 0.5,
   });

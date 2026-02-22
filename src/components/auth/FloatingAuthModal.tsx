@@ -134,7 +134,7 @@ export function FloatingAuthModal() {
             {/* Google Button */}
             <Button
               type="button"
-              className="group relative w-full gap-2 overflow-hidden rounded-xl bg-[#00A6FF] py-5 text-sm font-medium text-white shadow-[0_0_20px_-5px_rgba(0,166,255,0.4)] transition-all hover:bg-[#0095E6] hover:shadow-[0_0_25px_-5px_rgba(0,166,255,0.5)]"
+              className="group relative w-full gap-2 overflow-hidden rounded-xl bg-[#A78BFA] py-5 text-sm font-medium text-white shadow-[0_0_20px_-5px_rgba(167,139,250,0.4)] transition-all hover:bg-[#8B5CF6] hover:shadow-[0_0_25px_-5px_rgba(167,139,250,0.5)]"
               onClick={handleGoogleSignIn}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -260,7 +260,7 @@ export function FloatingAuthModal() {
 
               <Button
                 type="submit"
-                className="w-full rounded-xl bg-grainz-blue py-5 text-sm font-medium text-white shadow-[0_0_20px_-5px_rgba(0,166,255,0.4)] transition-all hover:bg-[#0095E6] hover:shadow-[0_0_25px_-5px_rgba(0,166,255,0.5)]"
+                className="w-full rounded-xl bg-grainz-blue py-5 text-sm font-medium text-white shadow-[0_0_20px_-5px_rgba(167,139,250,0.4)] transition-all hover:bg-[#8B5CF6] hover:shadow-[0_0_25px_-5px_rgba(167,139,250,0.5)]"
                 disabled={otp.length !== 6 || isLoading}
               >
                 {isLoading ? 'Verifying...' : 'Verify Code'}

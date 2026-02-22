@@ -333,8 +333,8 @@ const Slider = React.forwardRef<
           className={cn(
             'relative h-6 w-full grow cursor-pointer overflow-hidden transition-all',
             variant === 'capsule'
-              ? 'rounded-full bg-sky-500/20'
-              : 'rounded-[8px] bg-sky-500/20',
+              ? 'rounded-full bg-grainz-blue/20'
+              : 'rounded-[8px] bg-grainz-blue/20',
             (isDragging || isPointerDown) && 'h-7',
           )}
           onPointerDown={handlePointerDown}
@@ -344,7 +344,7 @@ const Slider = React.forwardRef<
         >
           <SliderPrimitive.Range
             className={cn(
-              'absolute h-full overflow-hidden bg-sky-300/20',
+              'absolute h-full overflow-hidden bg-grainz-blue/30',
               variant === 'capsule' ? 'rounded-full' : 'rounded-l-[8px]',
               isAnimating
                 ? 'transition-all duration-300 ease-out'
@@ -353,9 +353,9 @@ const Slider = React.forwardRef<
                   : 'transition-colors',
               !isDragging &&
                 !isPointerDown &&
-                '[@media(hover:hover)]:group-hover:bg-sky-100/50',
-              (isDragging || isPointerDown) && '!bg-sky-200/50',
-              isAnimating && '!bg-sky-200/50',
+                '[@media(hover:hover)]:group-hover:bg-grainz-blue/40',
+              (isDragging || isPointerDown) && '!bg-grainz-blue/50',
+              isAnimating && '!bg-grainz-blue/50',
             )}
           />
           {/* Default value marker */}

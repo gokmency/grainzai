@@ -16,7 +16,7 @@ export default function EditorView() {
   const [images, setImages] = useState<MessageItem[]>([]);
   const [meshUpload, setMeshUpload] = useState<MeshUploadState | null>(null);
   const [blob, setBlob] = useState<Blob | null>(null);
-  const [color, setColor] = useState<string>('#00A6FF');
+  const [color, setColor] = useState<string>('#A78BFA');
   const navigate = useNavigate();
   const { conversation, isConversationLoading } = useConversation();
 

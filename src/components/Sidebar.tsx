@@ -10,6 +10,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { isSupabaseConfigured, supabase } from '@/lib/supabase';
 import { useQuery } from '@tanstack/react-query';
 import { ConditionalWrapper } from './ConditionalWrapper';
+import { assetUrl } from '@/lib/utils';
 import { Conversation } from '@shared/types';
 import { AuthButton } from './auth/AuthButton';
 
@@ -100,15 +101,11 @@ export function Sidebar({ isSidebarOpen }: SidebarProps) {
         >
           <Link to="/">
             <div className="flex cursor-pointer items-center justify-center">
-              {isSidebarOpen ? (
-                <span className="font-semibold tracking-tight text-grainz-neutral-10">
-                  GRAINZ AI
-                </span>
-              ) : (
-                <span className="text-center text-xs font-semibold leading-none tracking-tight text-grainz-neutral-10">
-                  G
-                </span>
-              )}
+              <img
+                src={assetUrl('grainzai-logo.png')}
+                alt="GRAINZ AI"
+                className={isSidebarOpen ? 'h-8 w-auto max-w-full' : 'h-8 w-8 object-contain'}
+              />
             </div>
           </Link>
         </ConditionalWrapper>
@@ -138,7 +135,7 @@ export function Sidebar({ isSidebarOpen }: SidebarProps) {
                 className={` ${
                   isSidebarOpen
                     ? 'flex w-[216px] items-center justify-start gap-2 rounded-[100px] border border-grainz-blue bg-grainz-background-1 px-4 py-3 text-[#D7D7D7] hover:bg-grainz-blue/40 hover:text-grainz-text-primary'
-                    : 'flex h-[30px] w-[30px] items-center justify-center rounded-[8px] border-2 border-grainz-blue bg-[#191A1A] p-[2px] text-[#D7D7D7] shadow-[0px_4px_10px_0px_rgba(0,166,255,0.24)] hover:bg-grainz-blue/40 hover:text-grainz-text-primary'
+                    : 'flex h-[30px] w-[30px] items-center justify-center rounded-[8px] border-2 border-grainz-blue bg-[#191A1A] p-[2px] text-[#D7D7D7] shadow-[0px_4px_10px_0px_rgba(167,139,250,0.24)] hover:bg-grainz-blue/40 hover:text-grainz-text-primary'
                 } mb-4`}
                 onClick={() => navigate('/')}
               >

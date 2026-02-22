@@ -670,8 +670,8 @@ function TextAreaChat({
               ? 'h-0 border-transparent bg-transparent opacity-0'
               : isDragging
                 ? isDragHover
-                  ? 'h-20 border-[#00A6FF] bg-[rgba(0,166,255,0.24)] opacity-100' // Blue, full height
-                  : 'h-20 border-[#0077B7] bg-[rgba(0,166,255,0.12)] opacity-100' // Intermediate blue, full height
+                  ? 'h-20 border-[#A78BFA] bg-[rgba(167,139,250,0.24)] opacity-100' // Accent, full height
+                  : 'h-20 border-[#8B5CF6] bg-[rgba(167,139,250,0.12)] opacity-100' // Intermediate accent, full height
                 : images.length > 0
                   ? 'h-20 border-grainz-neutral-700 bg-grainz-neutral-950 opacity-100'
                   : 'h-0 border-transparent bg-transparent opacity-0',
@@ -710,13 +710,13 @@ function TextAreaChat({
                 <Images
                   className="h-5 w-5"
                   style={{
-                    color: isDragHover ? '#00A6FF' : 'rgba(0, 166, 255, 0.85)',
+                    color: isDragHover ? '#A78BFA' : 'rgba(167, 139, 250, 0.85)',
                   }}
                 />
                 <p
                   className="text-sm font-normal"
                   style={{
-                    color: isDragHover ? '#00A6FF' : 'rgba(0, 166, 255, 0.85)',
+                    color: isDragHover ? '#A78BFA' : 'rgba(167, 139, 250, 0.85)',
                   }}
                 >
                   Add more images here
@@ -734,13 +734,13 @@ function TextAreaChat({
                 <Images
                   className="h-5 w-5"
                   style={{
-                    color: isDragHover ? '#00A6FF' : 'rgba(0, 166, 255, 0.85)',
+                    color: isDragHover ? '#A78BFA' : 'rgba(167, 139, 250, 0.85)',
                   }}
                 />
                 <p
                   className="text-sm font-normal"
                   style={{
-                    color: isDragHover ? '#00A6FF' : 'rgba(0, 166, 255, 0.85)',
+                    color: isDragHover ? '#A78BFA' : 'rgba(167, 139, 250, 0.85)',
                   }}
                 >
                   Drop images and 3D models here
@@ -815,7 +815,7 @@ function TextAreaChat({
         className={cn(
           'relative rounded-2xl border-2',
           isFocused
-            ? 'border-grainz-blue shadow-[inset_0px_0px_8px_0px_rgba(0,0,0,0.08)]'
+            ? 'border-grainz-blue shadow-[inset_0px_0px_8px_0px_rgba(167,139,250,0.12)]'
             : 'border-grainz-neutral-700 shadow-[inset_0px_0px_8px_0px_rgba(0,0,0,0.08)] hover:border-grainz-neutral-400',
           'bg-grainz-background-2 transition-all duration-300',
         )}
