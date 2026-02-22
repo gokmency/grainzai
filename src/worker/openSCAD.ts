@@ -9,6 +9,7 @@ import {
   OpenSCADWorkerResponseData,
 } from './types';
 import OpenSCADError from '@/lib/OpenSCADError';
+import { assetUrl } from '@/lib/utils';
 import { libraries } from '@/lib/libraries.ts';
 
 const fontsConf = `<?xml version="1.0" encoding="UTF-8"?>
@@ -36,9 +37,7 @@ class OpenSCADWrapper {
     });
     try {
       if (!defaultFont) {
-        const fontResponse = await fetch(
-          `${import.meta.env.BASE_URL}/Geist-Regular.ttf`,
-        );
+        const fontResponse = await fetch(assetUrl('Geist-Regular.ttf'));
         defaultFont = await fontResponse.arrayBuffer();
       }
 

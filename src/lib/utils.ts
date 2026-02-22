@@ -6,6 +6,13 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+/** Public asset URL without double slash when base is "/" */
+export function assetUrl(path: string): string {
+  const base = import.meta.env.BASE_URL ?? '/';
+  const prefix = base === '/' || base === '' ? '' : base.replace(/\/$/, '');
+  return `${prefix}/${path.replace(/^\//, '')}`;
+}
+
 export const PARAMETRIC_MODELS: ModelConfig[] = [
   {
     id: 'google/gemini-3.1-pro-preview',
